@@ -1,0 +1,242 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Para minha princesa ❤️</title>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #ffe5ef, #ffc1dc);
+  font-family: Georgia, serif;
+  color: #8c3158;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  overflow: hidden;
+}
+
+.container {
+  width: 90%;
+  max-width: 430px;
+  padding: 25px;
+}
+
+.coracao {
+  font-size: 55px;
+  margin-bottom: 15px;
+  animation: pulsar 1.5s infinite;
+}
+
+h1 {
+  font-size: 29px;
+  line-height: 1.4;
+}
+
+p {
+  font-size: 18px;
+  line-height: 1.7;
+}
+
+button {
+  border: none;
+  padding: 14px 27px;
+  border-radius: 25px;
+  font-size: 17px;
+  margin: 12px;
+  cursor: pointer;
+  font-family: Arial, sans-serif;
+}
+
+#sim {
+  background: #ed78a5;
+  color: white;
+  box-shadow: 0 4px 12px #e9a0bd;
+}
+
+#nao {
+  background: #fff7fa;
+  color: #a94d73;
+  border: 1px solid #e8a6bf;
+  box-shadow: 0 3px 8px #e9b7c9;
+  position: fixed;
+  left: 53%;
+  top: 70%;
+}
+
+#final {
+  display: none;
+  animation: aparecer 1.2s ease;
+}
+
+#escolher {
+  display: block;
+  margin: 15px auto;
+  font-size: 14px;
+  background: #fff7fa;
+  color: #a94d73;
+  border: 1px solid #e8a6bf;
+}
+
+#arquivo {
+  display: none;
+}
+
+@keyframes aparecer {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulsar {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.12); }
+}
+
+.flutuante {
+  position: fixed;
+  bottom: -30px;
+  animation: subir 7s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes subir {
+  to {
+    transform: translateY(-110vh);
+    opacity: 0;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<audio id="musica" loop preload="auto">
+  <source src="COLE_AQUI_O_LINK_DA_MUSICA.mp3"
+  type="audio/mpeg">
+</audio>
+
+<div class="container" id="inicio">
+
+  <div class="coracao">💗</div>
+
+  <h1>Aceita ser minha princesa?</h1>
+
+  <p>
+    Tenho um carinho enorme por você.
+    <br>
+    E queria muito que você soubesse
+    o quanto é especial para mim.
+    <br><br>
+    Você faz meus dias serem mais bonitos. ❤️
+  </p>
+
+  <button id="sim" onclick="aceitar()">
+    SIM ❤️
+  </button>
+
+  <button id="nao">
+    NÃO 🙈
+  </button>
+
+</div>
+
+<div class="container" id="final">
+
+  <div class="coracao">🥹❤️</div>
+
+  <h1>EBAAA!</h1>
+
+  <p>
+    Eu já sabia que seria sua primeira opção! ❤️
+    <br><br>
+    Agora falando sério...
+    <br><br>
+    Quero continuar vivendo momentos incríveis
+    ao seu lado, fazendo você sorrir e mostrando
+    o quanto você é importante para mim.
+    <br><br>
+    Cada momento com você é especial.
+    <br><br>
+    <strong>Eu amo você, minha princesa! ❤️</strong>
+  </p>
+
+  <div class="coracao">💕</div>
+
+</div>
+
+<script>
+
+const nao = document.getElementById("nao");
+const musica = document.getElementById("musica");
+
+function fugir() {
+  const margem = 20;
+
+  const maxX = window.innerWidth - nao.offsetWidth - margem;
+  const maxY = window.innerHeight - nao.offsetHeight - margem;
+
+  const x = Math.max(margem,
+    Math.random() * Math.max(margem, maxX));
+
+  const y = Math.max(margem,
+    Math.random() * Math.max(margem, maxY));
+
+  nao.style.left = x + "px";
+  nao.style.top = y + "px";
+}
+
+nao.addEventListener("mouseover", fugir);
+
+nao.addEventListener("touchstart", function(event) {
+  event.preventDefault();
+  fugir();
+});
+
+function aceitar() {
+  document.getElementById("inicio").style.display = "none";
+  nao.style.display = "none";
+  document.getElementById("final").style.display = "block";
+
+  musica.volume = 0.5;
+
+  musica.play().catch(error => {
+    console.log("Não foi possível reproduzir a música:", error);
+  });
+
+  criarCoracoes();
+}
+
+function criarCoracoes() {
+  for (let i = 0; i < 18; i++) {
+    const coracao = document.createElement("div");
+
+    coracao.className = "flutuante";
+    coracao.textContent = "❤️";
+    coracao.style.left = Math.random() * 100 + "vw";
+    coracao.style.animationDelay = Math.random() * 5 + "s";
+    coracao.style.fontSize =
+      (15 + Math.random() * 20) + "px";
+
+    document.body.appendChild(coracao);
+  }
+}
+
+</script>
+
+</body>
+</html>
